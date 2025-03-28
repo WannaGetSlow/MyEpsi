@@ -1,6 +1,7 @@
+# backend/apps/users/urls.py
 from django.urls import path
-from .views import login_user
+from .views import user_profile
 
 urlpatterns = [
-    path('auth/login/', login_user, name='login'),
+    path('profile/', user_profile, name='user_profile'),
 ]
