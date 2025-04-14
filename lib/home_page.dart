@@ -52,7 +52,8 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'My Profile',
+            label: 'My Profile'
+            
           ),
         ],
       ),

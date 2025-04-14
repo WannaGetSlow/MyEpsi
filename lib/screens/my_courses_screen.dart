@@ -25,19 +25,19 @@ class MyCoursesScreen extends StatelessWidget {
           child: Column(
             children: [
               // Event cards
-              EventCard(
+              const EventCard(
                 title: 'Journée portes ouvertes',
                 date: '01/01/2023',
                 imageUrl: 'assets/img/event.jpg',
               ),
               const SizedBox(height: 16),
-              EventCard(
+              const EventCard(
                 title: 'Journée portes ouvertes',
                 date: '01/01/2023',
                 imageUrl: 'assets/img/event.jpg',
               ),
               const SizedBox(height: 16),
-              EventCard(
+              const EventCard(
                 title: 'Journée portes ouvertes',
                 date: '01/01/2023',
                 imageUrl: 'assets/img/event.jpg',
@@ -101,7 +101,7 @@ class EventCard extends StatelessWidget {
             end: Alignment.bottomCenter,
             colors: [
               Colors.transparent,
-              Colors.black.withOpacity(0.7),
+              Colors.black.withAlpha(179),
             ],
           ),
         ),

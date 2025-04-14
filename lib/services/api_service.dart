@@ -1,4 +1,8 @@
+// First run: dart pub add http
+// Then import the package:
 import 'package:http/http.dart' as http;
+
+
 import 'dart:convert';
 
 class ApiService {

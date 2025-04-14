@@ -21,8 +21,8 @@ class ProgrammeScreen extends StatelessWidget {
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 16),
-            decoration: BoxDecoration(
-              color: const Color(0xFF4A2A82),
+            decoration: const BoxDecoration(
+              color: Color(0xFF4A2A82),
               shape: BoxShape.circle,
             ),
             child: IconButton(

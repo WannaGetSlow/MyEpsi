@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'news_page.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,7 +12,7 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(
-          'Hello, Habibah',
+          'Mamy',
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -22,12 +23,24 @@ class HomeScreen extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(right: 16),
             decoration: BoxDecoration(
-              color: const Color(0xFF4A2A82),
+              color: Colors.grey[200],
               shape: BoxShape.circle,
+              border: Border.all(color: const Color(0xFF4A2A82), width: 2),
             ),
-            child: IconButton(
-              icon: const Icon(Icons.add, color: Colors.white),
-              onPressed: () {},
+            child: ClipOval(
+              child: Image.asset(
+                'assets/img/logo_epsi.jpg',
+                width: 40,
+                height: 40,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return const CircleAvatar(
+                    backgroundColor: Color(0xFF4A2A82),
+                    radius: 20,
+                    child: Icon(Icons.person, color: Colors.white),
+                  );
+                },
+              ),
             ),
           ),
         ],
@@ -95,7 +108,7 @@ class HomeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
-                            'Inscrivez-Vous!',
+                            'Espace Étudiant',
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -104,7 +117,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           const Text(
-                            'Devenez l\'expert informatique de demain',
+                            'Accédez à vos cours et ressources',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 12,
@@ -118,7 +131,7 @@ class HomeScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: const Text(
-                              'View more',
+                              'Accéder',
                               style: TextStyle(
                                 color: Color(0xFF4A2A82),
                                 fontSize: 12,
@@ -158,7 +171,12 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const NewsPage()),
+                      );
+                    },
                     child: const Text(
                       'Voir plus',
                       style: TextStyle(
@@ -180,7 +198,7 @@ class HomeScreen extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: Image.asset(
-                            'assets/img/campus.jpg',
+                            'assets/img/nv_campus.jpg',
                             height: 120,
                             width: double.infinity,
                             fit: BoxFit.cover,
@@ -204,7 +222,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         const Text(
-                          'Le Havre',
+                          'Paris',
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: 12,
@@ -221,7 +239,7 @@ class HomeScreen extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: Image.asset(
-                            'assets/img/students.jpg',
+                            'assets/img/elections_bde.jpg',
                             height: 120,
                             width: double.infinity,
                             fit: BoxFit.cover,
@@ -245,7 +263,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         const Text(
-                          'Le Havre',
+                          'Paris',
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: 12,
@@ -256,9 +274,127 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              
+              const SizedBox(height: 32),
+              
+              // Upcoming events section
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Événements à venir',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'Voir plus',
+                      style: TextStyle(
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              
+              // Events cards
+              Column(
+                children: [
+                  _buildEventCard(
+                    title: 'Journée portes ouvertes',
+                    date: '21/01/2024',
+                    image: 'assets/img/portesouvertes.jpg',
+                  ),
+                  const SizedBox(height: 12),
+                  _buildEventCard(
+                    title: 'Journée portes ouvertes',
+                    date: '17/02/2024',
+                    image: 'assets/img/portesouvertes.jpg',
+                  ),
+                  const SizedBox(height: 12),
+                  _buildEventCard(
+                    title: 'Journée portes ouvertes',
+                    date: '16/03/2024',
+                    image: 'assets/img/portesouvertes.jpg',
+                  ),
+                ],
+              ),
+              
+              const SizedBox(height: 16),
+              
+              // See more button
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey[300],
+                    foregroundColor: Colors.black87,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Text('Voir plus'),
+                ),
+              ),
             ],
           ),
         ),
+      ),
+    );
+  }
+  
+  Widget _buildEventCard({
+    required String title,
+    required String date,
+    required String image,
+  }) {
+    return Container(
+      height: 120,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        image: DecorationImage(
+          image: AssetImage(image),
+          fit: BoxFit.cover,
+          colorFilter: ColorFilter.mode(
+            Colors.black.withAlpha(102),
+            BlendMode.darken,
+          ),
+        ),
+      ),
+      child: Stack(
+        children: [
+          Positioned(
+            left: 16,
+            bottom: 16,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  date,
+                  style: const TextStyle(
+                    color: Colors.white70,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
