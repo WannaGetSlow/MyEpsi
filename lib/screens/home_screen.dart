@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'news_page.dart';
+import 'profile_screen.dart'; // Change from package:myepsi/screens/profile_screen.dart
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -20,26 +21,34 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         actions: [
-          Container(
-            margin: const EdgeInsets.only(right: 16),
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xFF4A2A82), width: 2),
-            ),
-            child: ClipOval(
-              child: Image.asset(
-                'assets/img/logo_epsi.jpg',
-                width: 40,
-                height: 40,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return const CircleAvatar(
-                    backgroundColor: Color(0xFF4A2A82),
-                    radius: 20,
-                    child: Icon(Icons.person, color: Colors.white),
-                  );
-                },
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfileScreen()),
+              );
+            },
+            child: Container(
+              margin: const EdgeInsets.only(right: 16),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                shape: BoxShape.circle,
+                border: Border.all(color: const Color(0xFF4A2A82), width: 2),
+              ),
+              child: ClipOval(
+                child: Image.asset(
+                  'assets/img/logo_epsi.jpg',
+                  width: 40,
+                  height: 40,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const CircleAvatar(
+                      backgroundColor: Color(0xFF4A2A82),
+                      radius: 20,
+                      child: Icon(Icons.person, color: Colors.white),
+                    );
+                  },
+                ),
               ),
             ),
           ),
@@ -192,84 +201,100 @@ class HomeScreen extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Image.asset(
-                            'assets/img/nv_campus.jpg',
-                            height: 120,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) {
-                              return Container(
-                                height: 120,
-                                color: Colors.grey[300],
-                                child: const Center(
-                                  child: Icon(Icons.image_not_supported),
-                                ),
-                              );
-                            },
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const NewsPage()),
+                        );
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Image.asset(
+                              'assets/img/nv_campus.jpg',
+                              height: 120,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  height: 120,
+                                  color: Colors.grey[300],
+                                  child: const Center(
+                                    child: Icon(Icons.image_not_supported),
+                                  ),
+                                );
+                              },
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        const Text(
-                          'Nouveau campus',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14,
+                          const SizedBox(height: 8),
+                          const Text(
+                            'Nouveau campus',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
                           ),
-                        ),
-                        const Text(
-                          'Paris',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12,
+                          const Text(
+                            'Paris',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Image.asset(
-                            'assets/img/elections_bde.jpg',
-                            height: 120,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) {
-                              return Container(
-                                height: 120,
-                                color: Colors.grey[300],
-                                child: const Center(
-                                  child: Icon(Icons.image_not_supported),
-                                ),
-                              );
-                            },
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const NewsPage()),
+                        );
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Image.asset(
+                              'assets/img/elections_bde.jpg',
+                              height: 120,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  height: 120,
+                                  color: Colors.grey[300],
+                                  child: const Center(
+                                    child: Icon(Icons.image_not_supported),
+                                  ),
+                                );
+                              },
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        const Text(
-                          'Élections BDE',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14,
+                          const SizedBox(height: 8),
+                          const Text(
+                            'Élections BDE',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
                           ),
-                        ),
-                        const Text(
-                          'Paris',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12,
+                          const Text(
+                            'Paris',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -288,15 +313,6 @@ class HomeScreen extends StatelessWidget {
                       fontSize: 18,
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Voir plus',
-                      style: TextStyle(
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
                 ],
               ),
               const SizedBox(height: 16),
@@ -304,22 +320,43 @@ class HomeScreen extends StatelessWidget {
               // Events cards
               Column(
                 children: [
-                  _buildEventCard(
-                    title: 'Journée portes ouvertes',
-                    date: '21/01/2024',
-                    image: 'assets/img/portesouvertes.jpg',
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => const NewsPage()),
+                      );
+                    },
+                    child: _buildEventCard(
+                      title: 'Journée portes ouvertes',
+                      date: '21/01/2024',
+                      image: 'assets/img/portesouvertes.jpg',
+                    ),
                   ),
                   const SizedBox(height: 12),
-                  _buildEventCard(
-                    title: 'Journée portes ouvertes',
-                    date: '17/02/2024',
-                    image: 'assets/img/portesouvertes.jpg',
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => const NewsPage()),
+                      );
+                    },
+                    child: _buildEventCard(
+                      title: 'Journée portes ouvertes',
+                      date: '17/02/2024',
+                      image: 'assets/img/portesouvertes.jpg',
+                    ),
                   ),
                   const SizedBox(height: 12),
-                  _buildEventCard(
-                    title: 'Journée portes ouvertes',
-                    date: '16/03/2024',
-                    image: 'assets/img/portesouvertes.jpg',
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => const NewsPage()),
+                      );
+                    },
+                    child: _buildEventCard(
+                      title: 'Journée portes ouvertes',
+                      date: '16/03/2024',
+                      image: 'assets/img/portesouvertes.jpg',
+                    ),
                   ),
                 ],
               ),
@@ -330,7 +367,11 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => const NewsPage()),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey[300],
                     foregroundColor: Colors.black87,

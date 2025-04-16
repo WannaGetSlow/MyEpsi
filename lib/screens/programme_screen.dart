@@ -13,58 +13,96 @@ class ProgrammeScreen extends StatelessWidget {
         title: const Text(
           'Programme',
           style: TextStyle(
-            color: Colors.black54,
-            fontWeight: FontWeight.w500,
-            fontSize: 18,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
           ),
         ),
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 16),
-            decoration: const BoxDecoration(
-              color: Color(0xFF4A2A82),
+            decoration: BoxDecoration(
+              color: Colors.grey[200],
               shape: BoxShape.circle,
+              border: Border.all(color: const Color(0xFF4A2A82), width: 2),
             ),
-            child: IconButton(
-              icon: const Icon(Icons.add, color: Colors.white),
-              onPressed: () {},
+            child: ClipOval(
+              child: Image.asset(
+                'assets/img/logo_epsi.jpg',
+                width: 40,
+                height: 40,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return const CircleAvatar(
+                    backgroundColor: Color(0xFF4A2A82),
+                    radius: 20,
+                    child: Icon(Icons.person, color: Colors.white),
+                  );
+                },
+              ),
             ),
           ),
         ],
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: GridView.count(
-            crossAxisCount: 2,
-            children: List.generate(4, (index) {
-              return Container(
-                margin: const EdgeInsets.all(2),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF4A2A82),
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              );
-            }),
-          ),
-        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ProgrammeCard(
-                title: 'Bachelor 1',
-                gradientColors: [Colors.purple.shade200, Colors.blue.shade200],
+              const Text(
+                'Votre programme',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+              const SizedBox(height: 20),
+              
+              // Programme cards
+              _buildProgrammeCard(
+                title: 'I1',
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF9C8AD9), Color(0xFF7C67C9)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
               ),
               const SizedBox(height: 16),
-              ProgrammeCard(
-                title: 'Bachelor 2',
-                gradientColors: [Colors.purple.shade200, Colors.blue.shade200],
+              _buildProgrammeCard(
+                title: 'I2',
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF9C8AD9), Color(0xFF7C67C9)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
               ),
               const SizedBox(height: 16),
-              ProgrammeCard(
-                title: 'Bachelor 3',
-                gradientColors: [Colors.purple.shade200, Colors.blue.shade200],
+              _buildProgrammeCard(
+                title: 'B3',
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF9C8AD9), Color(0xFF7C67C9)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+              const SizedBox(height: 16),
+              _buildProgrammeCard(
+                title: 'M1',
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF9C8AD9), Color(0xFF7C67C9)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+              const SizedBox(height: 16),
+              _buildProgrammeCard(
+                title: 'M2',
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF9C8AD9), Color(0xFF7C67C9)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
               ),
             ],
           ),
@@ -72,29 +110,17 @@ class ProgrammeScreen extends StatelessWidget {
       ),
     );
   }
-}
 
-class ProgrammeCard extends StatelessWidget {
-  final String title;
-  final List<Color> gradientColors;
-
-  const ProgrammeCard({
-    super.key,
-    required this.title,
-    required this.gradientColors,
-  });
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildProgrammeCard({
+    required String title,
+    required LinearGradient gradient,
+  }) {
     return Container(
-      height: 120,
+      height: 100,
+      width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: gradientColors,
-        ),
+        gradient: gradient,
       ),
       child: Center(
         child: Text(
@@ -102,7 +128,7 @@ class ProgrammeCard extends StatelessWidget {
           style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 20,
+            fontSize: 24,
           ),
         ),
       ),

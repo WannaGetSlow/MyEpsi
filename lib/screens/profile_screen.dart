@@ -6,7 +6,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -19,85 +19,149 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            // Profile header
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Colors.grey[200],
-                  child: const Icon(
-                    Icons.person,
-                    size: 40,
-                    color: Colors.grey,
-                  ),
+            // Profile Header
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 30),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(30),
+                  bottomRight: Radius.circular(30),
                 ),
-                const SizedBox(width: 16),
-                const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Mamy',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 10,
+                    offset: Offset(0, 5),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  // Profile Image
+                  Container(
+                    width: 120,
+                    height: 120,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: const Color(0xFF4A2A82), width: 3),
+                    ),
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/img/logo_epsi.jpg',
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return const CircleAvatar(
+                            backgroundColor: Color(0xFF4A2A82),
+                            radius: 60,
+                            child: Icon(Icons.person, color: Colors.white, size: 60),
+                          );
+                        },
                       ),
                     ),
-                    Text(
-                      'Étudiant',
+                  ),
+                  const SizedBox(height: 15),
+                  // Name
+                  const Text(
+                    'Jean Dupont',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  // Student ID
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                    decoration: BoxDecoration(
+                      // ignore: deprecated_member_use
+                      color: const Color(0xFF4A2A82).withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Text(
+                      'ID: 2023-EPSI-1234',
                       style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 16,
+                        color: Color(0xFF4A2A82),
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 32),
-            
-            // Profile options
-            ProfileOption(
-              icon: Icons.person_outline,
-              title: 'Informations personnelles',
-              onTap: () {},
-            ),
-            ProfileOption(
-              icon: Icons.notifications_none,
-              title: 'Notifications',
-              onTap: () {},
-            ),
-            ProfileOption(
-              icon: Icons.lock_outline,
-              title: 'Sécurité',
-              onTap: () {},
-            ),
-            ProfileOption(
-              icon: Icons.help_outline,
-              title: 'Aide',
-              onTap: () {},
-            ),
-            const Spacer(),
-            
-            // Logout button
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).popUntil((route) => route.isFirst);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF4A2A82),
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
                   ),
-                ),
-                child: const Text('Se déconnecter'),
+                  const SizedBox(height: 15),
+                  // Quick Stats
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _buildStatItem('Année', 'B3 Informatique'),
+                      _buildDivider(),
+                      _buildStatItem('Campus', 'Paris'),
+                      _buildDivider(),
+                      _buildStatItem('Moyenne', '16.5/20'),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            
+            // Information Sections
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                children: [
+                  _buildInfoSection(
+                    'Informations personnelles',
+                    [
+                      _buildInfoItem(Icons.email, 'Email', 'jean.dupont@epsi.fr'),
+                      _buildInfoItem(Icons.phone, 'Téléphone', '+33 6 12 34 56 78'),
+                      _buildInfoItem(Icons.cake, 'Date de naissance', '15/05/2000'),
+                      _buildInfoItem(Icons.location_on, 'Adresse', '123 Rue de Paris, 75001 Paris'),
+                    ],
+                  ),
+                  const SizedBox(height: 15),
+                  _buildInfoSection(
+                    'Parcours académique',
+                    [
+                      _buildInfoItem(Icons.school, 'Formation actuelle', 'Bachelor Informatique'),
+                      _buildInfoItem(Icons.calendar_today, 'Année d\'entrée', '2021'),
+                      _buildInfoItem(Icons.work, 'Stage actuel', 'Développeur Flutter chez TechCorp'),
+                    ],
+                  ),
+                  const SizedBox(height: 15),
+                  _buildInfoSection(
+                    'Documents',
+                    [
+                      _buildDocumentItem('Certificat de scolarité', 'PDF', Colors.red),
+                      _buildDocumentItem('Relevé de notes S1', 'PDF', Colors.blue),
+                      _buildDocumentItem('Convention de stage', 'DOCX', Colors.green),
+                    ],
+                  ),
+                  const SizedBox(height: 25),
+                  
+                  // Actions
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton.icon(
+                          onPressed: () {},
+                          icon: const Icon(Icons.edit),
+                          label: const Text('Modifier le profil'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF4A2A82),
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 30),
+                ],
               ),
             ),
           ],
@@ -105,34 +169,152 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
-}
 
-class ProfileOption extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final VoidCallback onTap;
+  Widget _buildDivider() {
+    return Container(
+      height: 30,
+      width: 1,
+      color: Colors.grey[300],
+      margin: const EdgeInsets.symmetric(horizontal: 15),
+    );
+  }
 
-  const ProfileOption({
-    super.key,
-    required this.icon,
-    required this.title,
-    required this.onTap,
-  });
+  Widget _buildStatItem(String title, String value) {
+    return Column(
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            color: Colors.grey[600],
+            fontSize: 12,
+          ),
+        ),
+        const SizedBox(height: 5),
+        Text(
+          value,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+          ),
+        ),
+      ],
+    );
+  }
 
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(
-        icon,
-        color: const Color(0xFF4A2A82),
+  Widget _buildInfoSection(String title, List<Widget> items) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+            // ignore: deprecated_member_use
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 5),
+          ),
+        ],
       ),
-      title: Text(title),
-      trailing: const Icon(
-        Icons.arrow_forward_ios,
-        size: 16,
-        color: Colors.grey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF4A2A82),
+            ),
+          ),
+          const SizedBox(height: 15),
+          ...items,
+        ],
       ),
-      onTap: onTap,
+    );
+  }
+
+  Widget _buildInfoItem(IconData icon, String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              // ignore: deprecated_member_use
+              color: const Color(0xFF4A2A82).withOpacity(0.1),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Icon(
+              icon,
+              color: const Color(0xFF4A2A82),
+              size: 20,
+            ),
+          ),
+          const SizedBox(width: 15),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: TextStyle(
+                  color: Colors.grey[600],
+                  fontSize: 12,
+                ),
+              ),
+              Text(
+                value,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDocumentItem(String name, String type, Color color) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              // ignore: deprecated_member_use
+              color: color.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Text(
+              type,
+              style: TextStyle(
+                color: color,
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+              ),
+            ),
+          ),
+          const SizedBox(width: 15),
+          Expanded(
+            child: Text(
+              name,
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 14,
+              ),
+            ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.download, color: Colors.grey),
+            onPressed: () {},
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
-import 'screens/my_courses_screen.dart';
+import 'screens/my_documents.dart';
 import 'screens/programme_screen.dart';
 import 'screens/profile_screen.dart';
 
@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   
   final List<Widget> _screens = [
     const HomeScreen(),
-    const MyCoursesScreen(),
+    const MyDocs(),
     const ProgrammeScreen(),
     const ProfileScreen(),
   ];
@@ -43,8 +43,8 @@ class _HomePageState extends State<HomePage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.play_circle_outline),
-            label: 'My Courses',
+            icon: Icon(Icons.description),
+            label: 'My documents',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.book),
@@ -53,7 +53,6 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'My Profile'
-            
           ),
         ],
       ),
