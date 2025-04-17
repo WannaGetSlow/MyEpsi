@@ -8,6 +8,7 @@ class MyDocs extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false, // Remove back button
         backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(
